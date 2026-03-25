@@ -1,16 +1,16 @@
 -- 01_create_runtime_tables.sql
 -- Creates the raw runtime cost event table and the daily mart table
--- Run against project: finops-demo-2026
+-- Run against project: finops-gcp-agent
 
 -- Dataset: agent_finops_raw
-CREATE SCHEMA IF NOT EXISTS `finops-demo-2026.agent_finops_raw`
+CREATE SCHEMA IF NOT EXISTS `finops-gcp-agent.agent_finops_raw`
 OPTIONS (
   description = 'Raw runtime cost events emitted by agent pipelines',
   location = 'US'
 );
 
 -- Dataset: agent_finops_mart
-CREATE SCHEMA IF NOT EXISTS `finops-demo-2026.agent_finops_mart`
+CREATE SCHEMA IF NOT EXISTS `finops-gcp-agent.agent_finops_mart`
 OPTIONS (
   description = 'Transformed cost reporting tables and views for Looker Studio',
   location = 'US'
@@ -19,7 +19,7 @@ OPTIONS (
 -- Dataset: billing_raw
 -- Note: Cloud Billing export destination is configured in GCP Console under Billing > Billing export
 -- The export creates tables automatically. Create the dataset here so it is ready.
-CREATE SCHEMA IF NOT EXISTS `finops-demo-2026.billing_raw`
+CREATE SCHEMA IF NOT EXISTS `finops-gcp-agent.billing_raw`
 OPTIONS (
   description = 'Cloud Billing export tables -- populated automatically by GCP billing export',
   location = 'US'
@@ -28,7 +28,7 @@ OPTIONS (
 -- Core runtime cost event table
 -- Partitioned by event date, clustered by agent_name and environment
 -- One row per pipeline step per run
-CREATE TABLE IF NOT EXISTS `finops-demo-2026.agent_finops_raw.agent_cost_events` (
+CREATE TABLE IF NOT EXISTS `finops-gcp-agent.agent_finops_raw.agent_cost_events` (
   event_ts              TIMESTAMP     NOT NULL,
   run_id                STRING        NOT NULL,
   agent_name            STRING        NOT NULL,
@@ -66,7 +66,7 @@ OPTIONS (
 -- Daily aggregated mart table
 -- Rebuilt nightly by scheduled query in BigQuery
 -- One row per agent + workflow + environment + urgency + model per day
-CREATE TABLE IF NOT EXISTS `finops-demo-2026.agent_finops_mart.agent_cost_daily` (
+CREATE TABLE IF NOT EXISTS `finops-gcp-agent.agent_finops_mart.agent_cost_daily` (
   cost_date                   DATE,
   agent_name                  STRING,
   workflow_name               STRING,
@@ -92,7 +92,7 @@ OPTIONS (
 );
 
 -- Anomaly table -- populated by scheduled anomaly detection query
-CREATE TABLE IF NOT EXISTS `finops-demo-2026.agent_finops_mart.run_cost_anomalies` (
+CREATE TABLE IF NOT EXISTS `finops-gcp-agent.agent_finops_mart.run_cost_anomalies` (
   detected_ts               TIMESTAMP,
   run_id                    STRING,
   agent_name                STRING,

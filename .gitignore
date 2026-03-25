@@ -6,3 +6,5 @@ __pycache__/
 service-account-key.json
 *.json.key
 .DS_Store
+
+venv/
