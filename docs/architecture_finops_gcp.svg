@@ -1,0 +1,74 @@
+<svg width="680" height="620" viewBox="0 0 680 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+<rect width="680" height="620" fill="#ffffff"/>
+<text font-size="11" x="340" y="16" text-anchor="middle" fill="#888780">gbhorne/agent-finops-gcp</text>
+<text font-size="15" font-weight="600" x="340" y="34" text-anchor="middle" fill="#2C2C2A">Agent FinOps GCP -- cost instrumentation architecture</text>
+
+<!-- Input -->
+<rect x="240" y="50" width="200" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="340" y="69" text-anchor="middle" fill="#2C2C2A">Document input</text>
+<text font-size="11" x="340" y="85" text-anchor="middle" fill="#5F5E5A">text / business memo / contract</text>
+<line x1="340" y1="94" x2="340" y2="118" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Agent container -->
+<rect x="30" y="118" width="620" height="180" rx="12" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text font-size="11" x="50" y="136" fill="#5F5E5A">Agent pipeline -- Google ADK or Vertex AI direct</text>
+
+<!-- Step 1 -->
+<rect x="60" y="148" width="180" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="150" y="170" text-anchor="middle" fill="#3C3489">Step 1</text>
+<text font-size="11" x="150" y="188" text-anchor="middle" fill="#534AB7">classify_document</text>
+<line x1="240" y1="176" x2="278" y2="176" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Gemini call 1 -->
+<rect x="278" y="156" width="124" height="40" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-size="11" font-weight="600" x="340" y="172" text-anchor="middle" fill="#085041">Gemini 2.5 Flash</text>
+<text font-size="10" x="340" y="187" text-anchor="middle" fill="#0F6E56">usageMetadata captured</text>
+<line x1="402" y1="176" x2="440" y2="176" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Step 2 -->
+<rect x="440" y="148" width="180" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="530" y="170" text-anchor="middle" fill="#3C3489">Step 2</text>
+<text font-size="11" x="530" y="188" text-anchor="middle" fill="#534AB7">generate_summary</text>
+
+<!-- Cost tracker box -->
+<rect x="100" y="220" width="480" height="60" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="340" y="242" text-anchor="middle" fill="#633806">InstrumentedGemini / RunTracker</text>
+<text font-size="11" x="340" y="260" text-anchor="middle" fill="#854F0B">captures: input_tokens, output_tokens, estimated_cost_usd, latency_ms per step</text>
+
+<line x1="340" y1="298" x2="340" y2="322" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- BigQuery raw -->
+<rect x="200" y="322" width="280" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="340" y="344" text-anchor="middle" fill="#0C447C">BigQuery -- agent_finops_raw</text>
+<text font-size="11" x="340" y="362" text-anchor="middle" fill="#185FA5">agent_cost_events (partitioned by date)</text>
+
+<line x1="340" y1="378" x2="340" y2="402" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- BigQuery mart -->
+<rect x="200" y="402" width="280" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="340" y="424" text-anchor="middle" fill="#0C447C">BigQuery -- agent_finops_mart</text>
+<text font-size="11" x="340" y="442" text-anchor="middle" fill="#185FA5">runtime views, dashboard views, anomaly table</text>
+
+<line x1="340" y1="458" x2="340" y2="482" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<!-- Looker Studio -->
+<rect x="160" y="482" width="360" height="56" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text font-size="13" font-weight="600" x="340" y="504" text-anchor="middle" fill="#27500A">Looker Studio Dashboard</text>
+<text font-size="11" x="340" y="522" text-anchor="middle" fill="#3B6D11">Executive Summary + Step Cost Breakdown</text>
+
+<!-- Legend -->
+<rect x="30" y="556" width="620" height="50" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="0.5"/>
+<rect x="50" y="572" width="12" height="12" rx="2" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text font-size="11" x="68" y="582" fill="#374151">Pipeline step</text>
+<rect x="160" y="572" width="12" height="12" rx="2" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text font-size="11" x="178" y="582" fill="#374151">Gemini + token capture</text>
+<rect x="320" y="572" width="12" height="12" rx="2" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text font-size="11" x="338" y="582" fill="#374151">Cost instrumentation</text>
+<rect x="470" y="572" width="12" height="12" rx="2" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text font-size="11" x="488" y="582" fill="#374151">GCP data layer</text>
+</svg>
