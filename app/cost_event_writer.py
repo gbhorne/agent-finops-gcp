@@ -29,7 +29,7 @@ class CostEventWriter:
         """
         Writes all step-level cost events from the accumulator to BigQuery.
         Returns the number of rows inserted.
-        Raises on insert error -- caller should handle and log.
+        Raises on insert error—caller should handle and log.
         """
         events = accumulator.to_cost_events()
         if not events:

@@ -19,7 +19,7 @@ FROM `finops-demo-2026.billing_raw.gcp_billing_export_resource_v1_*`
 CROSS JOIN UNNEST(credits) AS credits
 GROUP BY 1, 2, 3, 4, 5, 6;
 
--- Monthly billed cost by service -- for executive summary cards
+-- Monthly billed cost by service—for executive summary cards
 CREATE OR REPLACE VIEW `finops-demo-2026.agent_finops_mart.billing_monthly_service` AS
 SELECT
   DATE_TRUNC(usage_date, MONTH)   AS billing_month,
@@ -31,7 +31,7 @@ SELECT
 FROM `finops-demo-2026.agent_finops_mart.billing_daily_service`
 GROUP BY 1, 2, 3;
 
--- AI-specific services only -- Vertex AI, Healthcare API, Pub/Sub, Firestore, DLP
+-- AI-specific services only—Vertex AI, Healthcare API, Pub/Sub, Firestore, DLP
 CREATE OR REPLACE VIEW `finops-demo-2026.agent_finops_mart.billing_ai_services` AS
 SELECT
   usage_date,
@@ -51,7 +51,7 @@ WHERE service_name IN (
   'Cloud Run'
 );
 
--- Month-to-date total billed cost -- used in executive summary card
+-- Month-to-date total billed cost—used in executive summary card
 CREATE OR REPLACE VIEW `finops-demo-2026.agent_finops_mart.billing_mtd` AS
 SELECT
   project_id,

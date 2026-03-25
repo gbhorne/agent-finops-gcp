@@ -1,4 +1,4 @@
-# Agent FinOps -- GCP
+# Agent FinOps: GCP
 
 A full end-to-end FinOps build for agentic AI on Google Cloud. Two live agents (Google ADK and Vertex AI) process real documents using Gemini 2.5 Flash, capturing actual token costs from the Vertex AI API response and writing structured cost events to BigQuery. A Looker Studio dashboard visualizes real per-run costs, step-level token breakdown, and framework cost comparison.
 
@@ -14,11 +14,11 @@ This project uses synthetic document inputs generated for demonstration purposes
 
 ## Live Dashboard
 
-### Executive Summary -- MTD cost, run count, token totals, daily spend trend
+### Executive Summary—MTD cost, run count, token totals, daily spend trend
 
 ![Executive Summary Dashboard](docs/dashboard_executive_summary.png)
 
-### Step Cost Breakdown -- cost per pipeline step by framework
+### Step Cost Breakdown—cost per pipeline step by framework
 
 ![Step Cost Breakdown Dashboard](docs/dashboard_step_breakdown.png)
 
@@ -26,7 +26,7 @@ This project uses synthetic document inputs generated for demonstration purposes
 
 ## What This Builds
 
-Two document analysis agents -- identical pipeline logic, different frameworks -- both writing real cost data to the same BigQuery table:
+Two document analysis agents—identical pipeline logic, different frameworks—both writing real cost data to the same BigQuery table:
 
 | Agent | Framework | BigQuery tag |
 |-------|-----------|-------------|
@@ -34,10 +34,10 @@ Two document analysis agents -- identical pipeline logic, different frameworks -
 | Vertex Document Analyzer | Vertex AI direct + Gemini 2.5 Flash | vertex-doc-analyzer |
 
 Each agent runs a two-step pipeline:
-1. Classify -- document type, priority, topic (one Gemini call)
-2. Summarize -- structured executive summary with key points and action items (one Gemini call)
+1. Classify—document type, priority, topic (one Gemini call)
+2. Summarize—structured executive summary with key points and action items (one Gemini call)
 
-Every Gemini call captures actual token counts from usageMetadata.prompt_token_count and usageMetadata.candidates_token_count -- the same data Vertex AI uses for billing -- and calculates per-step cost at runtime pricing.
+Every Gemini call captures actual token counts from usageMetadata.prompt_token_count and usageMetadata.candidates_token_count—the same data Vertex AI uses for billing—and calculates per-step cost at runtime pricing.
 
 ---
 
@@ -50,13 +50,13 @@ Every Gemini call captures actual token counts from usageMetadata.prompt_token_c
 | Avg latency (classify) | 3,971ms | 3,277ms |
 | Avg cost per run | ~$0.00016 | ~$0.00013 |
 
-The ADK framework adds less prompt overhead than the direct Vertex AI implementation -- observable in real token count data from live API calls.
+The ADK framework adds less prompt overhead than the direct Vertex AI implementation—observable in real token count data from live API calls.
 
 ---
 
 ## Architecture
 
-![Agent FinOps GCP -- cost instrumentation architecture](docs/architecture_finops_gcp.svg)
+![Agent FinOps GCP—cost instrumentation architecture](docs/architecture_finops_gcp.svg)
 
 ---
 
@@ -93,11 +93,11 @@ docs/
 | Service | Role |
 |---------|------|
 | Vertex AI (Gemini 2.5 Flash) | Document classification and summarization |
-| BigQuery (agent_finops_raw) | Raw cost events -- one row per step per run |
+| BigQuery (agent_finops_raw) | Raw cost events—one row per step per run |
 | BigQuery (agent_finops_mart) | Aggregated views for Looker Studio |
 | Looker Studio | Live cost dashboard |
 | Google ADK | ADK agent orchestration |
 
 ---
 
-*Built by [Gregory Horne](https://github.com/gbhorne) -- GCP Agentic Systems and Agent FinOps portfolio.*
+*Built by [Gregory Horne](https://github.com/gbhorne)—GCP Agentic Systems and Agent FinOps portfolio.*

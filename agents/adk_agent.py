@@ -7,7 +7,7 @@ This agent accepts a text input, classifies the document type and priority,
 generates a structured summary, and writes real cost events to BigQuery.
 
 Every Gemini call captures actual token counts from usageMetadata --
-the same data Vertex AI uses for billing -- and calculates per-step cost.
+the same data Vertex AI uses for billing—and calculates per-step cost.
 
 Launch: adk web (from repo root, with GOOGLE_GENAI_USE_VERTEXAI=true)
 """
@@ -21,8 +21,8 @@ from agents.cost_tracker import RunTracker, gemini_call, write_to_bigquery
 def analyze_document(text: str) -> str:
     """
     Analyzes an input document using a two-step pipeline:
-    Step 1 -- classify: document type, priority, topic
-    Step 2 -- summarize: structured summary with key points
+    Step 1: classify: document type, priority, topic
+    Step 2: summarize: structured summary with key points
 
     Tracks real Gemini token costs and writes to BigQuery after each run.
 

@@ -20,7 +20,7 @@ import vertexai
 from vertexai.generative_models import GenerativeModel
 
 
-# Current Vertex AI pricing (USD per 1,000 tokens) -- update as pricing changes
+# Current Vertex AI pricing (USD per 1,000 tokens)—update as pricing changes
 # Source: cloud.google.com/vertex-ai/generative-ai/pricing
 PRICING = {
     "gemini-2.5-flash": {
@@ -140,8 +140,8 @@ class InstrumentedGemini:
     Wrapper around Vertex AI GenerativeModel that captures token usage
     from usageMetadata after each generate_content call.
 
-    Token counts are taken from the actual API response -- not estimated
-    pre-call -- ensuring accuracy for cost accounting purposes.
+    Token counts are taken from the actual API response—not estimated
+    pre-call—ensuring accuracy for cost accounting purposes.
     """
 
     def __init__(

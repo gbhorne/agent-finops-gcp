@@ -1,5 +1,5 @@
 -- 04_dashboard_views.sql
--- Dashboard views for Looker Studio -- runtime data only
+-- Dashboard views for Looker Studio—runtime data only
 -- Billing export views added separately once Cloud Billing export is configured
 
 CREATE OR REPLACE VIEW `finops-gcp-agent.agent_finops_mart.dashboard_executive_summary` AS

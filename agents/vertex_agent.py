@@ -1,7 +1,7 @@
 """
 vertex_agent.py
 
-Vertex AI Agent Builder -- Document Analysis Agent with live cost instrumentation.
+Vertex AI Agent Builder: Document Analysis Agent with live cost instrumentation.
 
 This is the same two-step classify-and-summarize pipeline as the ADK agent,
 implemented as a standalone Python script that runs against Vertex AI directly.
@@ -26,7 +26,7 @@ from agents.cost_tracker import RunTracker, gemini_call, write_to_bigquery
 def analyze_document_vertex(text: str, environment: str = "production") -> dict:
     """
     Two-step document analysis pipeline instrumented for cost tracking.
-    Identical logic to the ADK agent -- different agent_name tag.
+    Identical logic to the ADK agent—different agent_name tag.
 
     Args:
         text: Document text to analyze
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     ]
 
     print("=" * 60)
-    print("Vertex AI Agent Builder -- Document Analysis Agent")
+    print("Vertex AI Agent Builder: Document Analysis Agent")
     print("Cost Instrumentation Demo")
     print("=" * 60)
 
@@ -239,7 +239,7 @@ if __name__ == "__main__":
         print(f"  Run ID: {result['run_id']}")
 
     print("\n" + "=" * 60)
-    print("COST SUMMARY -- ALL RUNS")
+    print("COST SUMMARY: ALL RUNS")
     print("=" * 60)
     print(f"Total runs:   3")
     print(f"Total tokens: {total_tokens:,}")

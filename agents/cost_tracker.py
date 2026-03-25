@@ -29,7 +29,7 @@ LOCATION = os.environ.get("LOCATION", "us-central1")
 BQ_DATASET = os.environ.get("BQ_DATASET_RAW", "agent_finops_raw")
 BQ_TABLE = os.environ.get("BQ_TABLE_EVENTS", "agent_cost_events")
 
-# Vertex AI pricing -- USD per 1,000 tokens (March 2026)
+# Vertex AI pricing—USD per 1,000 tokens (March 2026)
 # Source: cloud.google.com/vertex-ai/generative-ai/pricing
 PRICING = {
     "gemini-2.5-flash": {
@@ -206,7 +206,7 @@ def write_to_bigquery(tracker: RunTracker) -> bool:
     """
     Writes all cost events from the tracker to BigQuery.
     Returns True on success, False on failure.
-    Uses write_safe pattern -- never blocks the pipeline on cost logging failure.
+    Uses write_safe pattern—never blocks the pipeline on cost logging failure.
     """
     try:
         client = bigquery.Client(project=PROJECT_ID)
