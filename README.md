@@ -56,40 +56,7 @@ The ADK framework adds less prompt overhead than the direct Vertex AI implementa
 
 ## Architecture
 
-```
-Document input (text)
-        |
-        v
-Agent pipeline (Python)
-  Step 1: classify_document  --> Gemini 2.5 Flash call
-  Step 2: generate_summary   --> Gemini 2.5 Flash call
-        |
-        | InstrumentedGemini wrapper captures:
-        |   usageMetadata.prompt_token_count
-        |   usageMetadata.candidates_token_count
-        |   estimated_cost_usd (calculated at runtime)
-        |   latency_ms
-        |
-        v
-RunTracker accumulates cost across all steps
-        |
-        v
-CostEventWriter writes to BigQuery
-  finops-gcp-agent.agent_finops_raw.agent_cost_events
-  (partitioned by date, clustered by agent_name)
-        |
-        v
-BigQuery views (agent_finops_mart)
-  runtime_daily_agent      daily cost aggregates
-  runtime_step_cost        per-step cost breakdown
-  dashboard_daily_spend    Looker Studio page 1
-  dashboard_step_breakdown Looker Studio page 2
-        |
-        v
-Looker Studio dashboard
-  Page 1: Executive Summary
-  Page 2: Step Cost Breakdown
-```
+![Agent FinOps GCP -- cost instrumentation architecture](docs/architecture_finops_gcp.svg)
 
 ---
 
