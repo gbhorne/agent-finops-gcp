@@ -64,26 +64,22 @@ The ADK framework adds less prompt overhead than the direct Vertex AI implementa
 
 ```
 agent-finops-gcp/
-agents/
-  cost_tracker.py         Core instrumentation: token capture and BigQuery writer
-  adk_agent.py            Google ADK document analysis agent
-  vertex_agent.py         Vertex AI document analysis agent and test runner
-  agent.py                ADK entry point
-sql/
-  01_create_runtime_tables.sql  BigQuery datasets and tables
-  02_billing_views.sql          Cloud Billing export views
-  03_runtime_views.sql          Runtime cost views
-  04_dashboard_views.sql        Looker Studio data source views
-  05_anomaly_queries.sql        Anomaly detection and mart rebuild
-app/
-  token_instrumentation.py  Standalone instrumentation module
-  cost_event_writer.py      BigQuery writer
-  demo_agent.py             Simulated data loader
-docs/
-  ARCHITECTURE.md
-  dashboard_executive_summary.png
-  dashboard_step_breakdown.png
+├── agents/
+│   ├── adk_agent.py            # Google ADK document analysis agent
+│   ├── vertex_agent.py         # Vertex AI document analysis agent
+│   └── agent.py                # ADK entry point
+├── app/
+│   ├── token_instrumentation.py  # Instrumentation module: token capture and cost calculation
+│   └── cost_event_writer.py      # BigQuery writer pattern
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── architecture_finops_gcp.svg
+│   ├── dashboard_executive_summary.png
+│   └── dashboard_step_breakdown.png
+└── requirements.txt
 ```
+
+> Infrastructure config, BigQuery schema scripts, and environment files are not included in this public repo. The full architecture is documented in `docs/ARCHITECTURE.md`.
 
 ---
 
